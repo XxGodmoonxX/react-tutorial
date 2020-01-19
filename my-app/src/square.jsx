@@ -15,9 +15,12 @@ import React from "react";
 //   }
 // }
 
+// 関数コンポーネント化 親からpropsを受け継ぐ
 function Square(props) {
   return (
+    // 親のonClick
     <button className="square" onClick={props.onClick}>
+      {/* 親のvalue */}
       {props.value}
     </button>
   );
