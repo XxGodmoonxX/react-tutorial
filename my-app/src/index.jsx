@@ -15,8 +15,19 @@ class Game extends React.Component {
         }
       ],
       // xIsNextというStateを用意 最初はtrue
-      xIsNext: true
+      xIsNext: true,
+      // stepNumber 今何手目か
+      stepNumber: 0
     };
+  }
+
+  jumpTo(step) {
+    this.setState({
+      // stateであるstepNumberにset
+      stepNumber: step,
+      // xIsNextは2の倍数のときtrue
+      xIsNext: (step % 2) === 0,
+    })
   }
 
   handleClick(i) {
@@ -57,7 +68,7 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const desc = move ? "Go to move #" + move : "Go to game start";
       return (
-        <li>
+        <li key={move}>
           {/* ボタンをクリックしたらjumpTo */}
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
