@@ -31,8 +31,8 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    // stateのhistoryを代入
-    const history = this.state.history;
+    // stateのhistoryを複製して代入
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     // historyの今のものを代入
     const current = history[history.length - 1];
     // 配列を複製
@@ -53,7 +53,9 @@ class Game extends React.Component {
         }
       ]),
       // stateのxIsNextの真偽を逆転させる
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      // stepNumberにhistoryに作られた配列の数を代入
+      stepNumber: history.length
     });
   }
 
@@ -61,7 +63,7 @@ class Game extends React.Component {
     // stateのhistoryを代入
     const history = this.state.history;
     // historyの今のものを代入
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     // 変数winnerにcalculateWinnerの結果を入れる
     const winner = calculateWinner(current.squares);
     // historyにmapをかける
